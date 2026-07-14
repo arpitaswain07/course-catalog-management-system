@@ -11,3 +11,10 @@ class CourseCreate(BaseModel):
     enrolled_count: int
     price: int
     status: str
+
+class EnrollmentCreate(BaseModel):
+    enrollment_id: int
+    course_id: int
+    student_id: int
+    enrollment_date: str
+    status: str

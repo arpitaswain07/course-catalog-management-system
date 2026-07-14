@@ -1,75 +1,103 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from database import get_db
+from models import Course, Enrollment
+from schema import CourseCreate, EnrollmentCreate
 router = APIRouter(
     prefix="/enrollments",
     tags=["Enrollments"]
 )
-# ------------------------------------------------------
-# Hardcoded Enrollment Data
-# ------------------------------------------------------
-enrollments = [
-    {
-        "enrollment_id": 1,
-        "course_id": 101,
-        "student_id": 501,
-        "enrollment_date": "2026-07-01",
-        "status": "enrolled"
-    },
-    {
-        "enrollment_id": 2,
-        "course_id": 103,
-        "student_id": 502,
-        "enrollment_date": "2026-07-02",
-        "status": "completed"
-    }
-]
 
 
 @router.get("/")
-def list_enrollments():
-    return enrollments
+def list_enrollments(db: Session = Depends(get_db)):
+    return db.query(Enrollment).all()
 
 
 @router.get("/{enrollment_id}")
-def get_enrollment(enrollment_id: int):
-    for enrollment in enrollments:
-        if enrollment["enrollment_id"] == enrollment_id:
-            return enrollment
-    raise HTTPException(status_code=404, detail="Enrollment Not Found")
+def get_enrollment(
+    enrollment_id: int,
+    db: Session = Depends(get_db)
+):
+    enrollment = db.query(Enrollment).filter(
+        Enrollment.enrollment_id == enrollment_id
+    ).first()
+
+    if enrollment is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Enrollment Not Found"
+        )
+
+    return enrollment
 
 
 @router.post("/")
-def enroll_student(enrollment: dict):
-    enrollments.append(enrollment)
+def create_course(course: CourseCreate, db: Session = Depends(get_db)):
+    new_course = Course(
+        course_id=course.course_id,
+        title=course.title,
+        description=course.description,
+        instructor=course.instructor,
+        credits=course.credits,
+        capacity=course.capacity,
+        enrolled_count=course.enrolled_count,
+        price=course.price,
+        status=course.status
+    )
+
+    db.add(new_course)
+    db.commit()
+    db.refresh(new_course)
+
     return {
-        "message": "Enrollment Successful",
-        "enrollment": enrollment
+        "message": "Course Created Successfully",
+        "course": new_course
     }
 
 
 @router.delete("/{enrollment_id}")
-def drop_course(enrollment_id: int):
-    for enrollment in enrollments:
-        if enrollment["enrollment_id"] == enrollment_id:
-            enrollments.remove(enrollment)
-            return {
-                "message": "Enrollment Dropped Successfully"
-            }
-    raise HTTPException(status_code=404, detail="Enrollment Not Found")
+def drop_course(
+    enrollment_id: int,
+    db: Session = Depends(get_db)
+):
+    enrollment = db.query(Enrollment).filter(
+        Enrollment.enrollment_id == enrollment_id
+    ).first()
+
+    if enrollment is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Enrollment Not Found"
+        )
+
+    db.delete(enrollment)
+    db.commit()
+
+    return {
+        "message": "Enrollment Dropped Successfully"
+    }
 
 
 @router.get("/student/{student_id}")
-def student_courses(student_id: int):
-    result = []
-    for enrollment in enrollments:
-        if enrollment["student_id"] == student_id:
-            result.append(enrollment)
-    return result
+def student_courses(
+    student_id: int,
+    db: Session = Depends(get_db)
+):
+    enrollments = db.query(Enrollment).filter(
+        Enrollment.student_id == student_id
+    ).all()
+
+    return enrollments
 
 
 @router.get("/course/{course_id}")
-def course_students(course_id: int):
-    result = []
-    for enrollment in enrollments:
-        if enrollment["course_id"] == course_id:
-            result.append(enrollment)
-    return result
+def course_students(
+    course_id: int,
+    db: Session = Depends(get_db)
+):
+    enrollments = db.query(Enrollment).filter(
+        Enrollment.course_id == course_id
+    ).all()
+
+    return enrollments
