@@ -12,6 +12,7 @@ class CourseCreate(BaseModel):
     price: int
     status: str
 
+
 class EnrollmentCreate(BaseModel):
     enrollment_id: int
     course_id: int
