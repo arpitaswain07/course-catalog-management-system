@@ -1,5 +1,27 @@
+
+# Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Python virtual environments
 .venv/
 venv/
+env/
+
+# Environment variables and secrets
 .env
+.env.*
+!.env.example
+
+# React / Vite dependencies and build files
+frontend/node_modules/
+frontend/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor and operating system files
+.vscode/
+.DS_Store
+Thumbs.db

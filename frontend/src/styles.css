@@ -70,3 +70,65 @@ button{
 button:hover{
     background:#1d4ed8;
 }
+
+.hero{
+    text-align:center;
+    padding:100px 20px;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    color:white;
+}
+
+.hero h1{
+    font-size:52px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    width:700px;
+    max-width:90%;
+    margin:auto;
+    line-height:1.7;
+}
+
+.hero-btn{
+    margin-top:35px;
+    padding:15px 35px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    color:#2563eb;
+    font-size:18px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.hero-btn:hover{
+    transform:translateY(-3px);
+}
+
+.search-container{
+    max-width:700px;
+    margin:60px auto 20px;
+    text-align:center;
+}
+
+.search-container h2{
+    font-size:34px;
+    color:#1f2937;
+    margin-bottom:10px;
+}
+
+.search-container p{
+    color:#6b7280;
+    margin-bottom:25px;
+}
+
+.search-container input{
+    width:100%;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #d1d5db;
+    font-size:16px;
+}
