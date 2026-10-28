@@ -1,19 +1,15 @@
-function SearchBar() {
+
+function SearchBar({ searchTerm, setSearchTerm }) {
     return (
-        <div className="search-container">
-
-            <h2>Explore Our Courses</h2>
-
-            <p>
-                Find the perfect course to start learning today.
-            </p>
-
+        <section className="search-container">
             <input
                 type="text"
-                placeholder="🔍 Search courses..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                placeholder="Search courses by name, instructor, or description..."
+                aria-label="Search courses"
             />
-
-        </div>
+        </section>
     );
 }
 

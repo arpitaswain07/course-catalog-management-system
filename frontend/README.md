@@ -1,16 +1,136 @@
-# React + Vite
+# Course Catalog Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A full-stack web application for browsing and managing courses, built with a React frontend, FastAPI backend, and MySQL database.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Browse available courses from the backend API
+- Search courses by course name, instructor, or description
+- View additional information for individual courses
+- REST API endpoints for course management
+- MySQL database integration
+- Responsive course catalog interface
 
-## React Compiler
+## Technology Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend**
+- React
+- Vite
+- JavaScript
+- CSS
 
-## Expanding the Oxlint configuration
+**Backend**
+- Python
+- FastAPI
+- SQLAlchemy
+- Pydantic
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+**Database**
+- MySQL
+
+**Tools**
+- Git
+- GitHub
+- Visual Studio Code
+
+## Project Structure
+
+```text
+course_catalog/
+├── controllers/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── styles.css
+│   ├── package.json
+│   └── vite.config.js
+├── database.py
+├── main.py
+├── models.py
+├── schema.py
+├── requirements.txt
+└── README.md
+```
+
+## Prerequisites
+
+- Python 3.10 or a compatible version
+- Node.js and npm
+- MySQL Server
+- Git
+
+## Setup and Installation
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+cd course_catalog
+```
+
+### 2. Configure the database
+
+Create a MySQL database and configure the connection settings expected by `database.py`.
+
+Keep database credentials in environment variables or a local `.env` file. Never commit passwords or secret keys.
+
+### 3. Set up the backend
+
+Create and activate a Python virtual environment, then install dependencies.
+
+**Windows PowerShell:**
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Start the API:
+
+```powershell
+python -m uvicorn main:app --reload
+```
+
+Open the interactive API documentation at:
+
+http://127.0.0.1:8000/docs
+
+### 4. Set up the frontend
+
+Open a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open the local URL displayed by Vite in your terminal.
+
+## API Documentation
+
+FastAPI provides interactive API documentation at `/docs` when the backend is running.
+
+The available endpoints depend on the routes registered in the application.
+
+## Current Status
+
+The frontend has been tested for course loading, search filtering, course details toggling, and responsive layout. The frontend dependency audit reported zero vulnerabilities after `npm audit fix`.
+
+Backend endpoint testing and complete application verification should be completed before describing the project as fully production-ready.
+
+## Future Improvements
+
+- Add course creation, editing, and deletion through the interface
+- Add dedicated course detail pages
+- Improve automated testing
+- Add authentication and authorization
+- Deploy the frontend and backend
+
+## Author
+
+Created as a full-stack software development project.

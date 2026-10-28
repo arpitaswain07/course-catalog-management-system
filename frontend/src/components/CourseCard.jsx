@@ -1,30 +1,54 @@
+
+import { useState } from "react";
+
 function CourseCard({ course }) {
+    const [showDetails, setShowDetails] = useState(false);
+
     return (
-        <div className="course-card">
-
-            <h2>{course.title}</h2>
+        <article className="course-card">
+            <h2>{course.title ?? course.course_name}</h2>
 
             <p>
-                <strong>👨 Instructor:</strong> {course.instructor}
+                <strong>👨 Instructor:</strong>{" "}
+                {course.instructor ?? course.instructor_name ?? "Not specified"}
             </p>
 
             <p>
-                <strong>⭐ Credits:</strong> {course.credits}
+                <strong>⭐ Credits:</strong> {course.credits ?? "N/A"}
             </p>
 
             <p>
-                <strong>💺 Capacity:</strong> {course.capacity}
+                <strong>💺 Capacity:</strong> {course.capacity ?? "N/A"}
             </p>
 
             <p>
-                <strong>💰 Price:</strong> ₹{course.price}
+                <strong>💰 Price:</strong> ₹{course.price ?? "N/A"}
             </p>
 
-            <button className="view-btn">
-                View Details
+            <button
+                type="button"
+                className="view-btn"
+                onClick={() => setShowDetails((current) => !current)}
+                aria-expanded={showDetails}
+            >
+                {showDetails ? "Hide Details" : "View Details"}
             </button>
 
-        </div>
+            {showDetails && (
+                <section className="course-details">
+                    <h3>Course Details</h3>
+                    <p><strong>Course ID:</strong> {course.course_id}</p>
+                    <p>
+                        <strong>Description:</strong>{" "}
+                        {course.description ?? "No description available."}
+                    </p>
+                    <p>
+                        <strong>Course name:</strong>{" "}
+                        {course.title ?? course.course_name ?? "N/A"}
+                    </p>
+                </section>
+            )}
+        </article>
     );
 }
 
