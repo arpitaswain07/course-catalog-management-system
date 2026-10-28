@@ -87,6 +87,21 @@ npm run dev
 
 This project is under development. Features and documentation may evolve as development continues.
 
+## 📸 Screenshots
+
+### 1. Home Page
+![Course Catalog Home Page](frontend/screenshots/home-page.png)
+
+### 2. Course Listing
+![Course Listing](frontend/screenshots/course-listing.png)
+
+### 3. Search Functionality
+![Search Functionality](frontend/screenshots/search-functionality.png)
+
+### 4. Course Details
+![Course Details](frontend/screenshots/course-details.png)
+
+
 ## Author
 
 **Arpita Swain**
