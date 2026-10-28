@@ -90,17 +90,16 @@ This project is under development. Features and documentation may evolve as deve
 ## 📸 Screenshots
 
 ### 1. Home Page
-![Course Catalog Home Page](frontend/screenshots/home-page.png)
+![Home Page](./frontend/screenshots/home-page.png)
 
 ### 2. Course Listing
-![Course Listing](frontend/screenshots/course-listing.png)
+![Course Listing](./frontend/screenshots/course-listing.png)
 
 ### 3. Search Functionality
-![Search Functionality](frontend/screenshots/search-functionality.png)
+![Search Functionality](./frontend/screenshots/search-functionality.png)
 
 ### 4. Course Details
-![Course Details](frontend/screenshots/course-details.png)
-
+![Course Details](./frontend/screenshots/course-details.png)
 
 ## Author
 
